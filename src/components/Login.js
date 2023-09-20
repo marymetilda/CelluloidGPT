@@ -1,12 +1,21 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
-// import { auth } from "../utils/firebase";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
+import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const email = useRef(null);
   const password = useRef(null);
@@ -20,38 +29,65 @@ const Login = () => {
     // Validate the form data
     const emailData = email.current.value;
     const passwordData = password.current.value;
-    const userNameData = userName?.current?.value;
+    const nameData = userName.current.value;
 
-    const userMessage = userNameData ? null : "UserName is not valid";
     const message = checkValidData(emailData, passwordData);
-    console.log(userMessage, userNameData);
 
     setErrorMessage(message);
-    if (!isSignInForm) {
-      setErrorMessage(userMessage);
-      setErrorMessage(message);
-    }
-    // setErrorMessage(userMessage);
 
-    if (message || userMessage) return;
+    if (message) return;
+
+    console.log(isSignInForm);
 
     // Sign In Sign Up Logic
     if (!isSignInForm) {
       // Sign Up Logic
-      console.log("hello");
 
-      // createUserWithEmailAndPassword(auth, emailData, passwordData)
-      //   .then((userCredential) => {
-      //     // Signed in
-      //     const user = userCredential.user;
-      //     console.log(user);
-      //   })
-      //   .catch((error) => {
-      //     const errorCode = error.code;
-      //     const errorMessage = error.message;
-      //     setErrorMessage(errorCode + "-" + errorMessage);
-      //   });
+      createUserWithEmailAndPassword(auth, emailData, passwordData)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          updateProfile(user, {
+            displayName: nameData,
+            photoURL: "https://avatars.githubusercontent.com/u/106382559?v=4",
+          })
+            .then(() => {
+              const { uid, email, displayName, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  email: email,
+                  displayName: displayName,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {
+              // An error occurred
+              setErrorMessage(error.message);
+            });
+
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
     } else {
+      signInWithEmailAndPassword(auth, emailData, passwordData)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          navigate("/browse");
+          console.log(user);
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorMessage(errorCode + "-" + errorMessage);
+        });
     }
   };
 
