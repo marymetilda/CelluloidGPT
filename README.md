@@ -33,6 +33,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - Update Store with Trailer Video Data
 - Embedded the Youtube video and make it autoplay and mute
 - Tailwind Classes to make Main Container look awesome
+- Build secondary component
+- Build Movie List
+- Build Movie card
+- TMDB Image CDN URL
+- Made the Browse page amazing with Tailwind css
+- usePopularMovies custom hook
+- useTopRatedMovies custom hook
+- useUpcomingMovies custom hook
+- GPT Search Page
+- GPT Search Bar
+- Multi-language Feature in our App
 
 # Features
 
@@ -64,9 +75,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 - TMDB - login ==> edit profile ==> api
 
 - UI structure of browser page
+
   - MainContainer
     - videoBackground
     - videoTitle
   - SecondaryContainer
-    - MovieLise \* n
+    - MovieList \* n
       - cards \* n
+
+- SecondaryContainer
+  - MovieList - Popular
+    - MovieCard \* n
+  - MovieList - Trending
+  - MovieList - Now Playing
+  - MovieList - Horror
