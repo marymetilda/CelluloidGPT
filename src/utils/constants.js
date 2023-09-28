@@ -13,4 +13,32 @@ const API_OPTIONS = {
   },
 };
 
-export { LOGO, LOGIN_BG_URL, USER_AVTAR, API_OPTIONS };
+const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500/";
+
+const SUPPORTED_LANGUAGES = [
+  {
+    identifier: "en",
+    name: "English",
+  },
+  {
+    identifier: "hindi",
+    name: "Hindi",
+  },
+  {
+    identifier: "spanish",
+    name: "Spanish",
+  },
+  {
+    identifier: "malayalam",
+    name: "Malayalam",
+  },
+];
+
+export {
+  LOGO,
+  IMG_CDN_URL,
+  SUPPORTED_LANGUAGES,
+  LOGIN_BG_URL,
+  USER_AVTAR,
+  API_OPTIONS,
+};
