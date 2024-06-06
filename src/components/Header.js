@@ -63,7 +63,7 @@ function Header() {
   };
 
   return (
-    <div className="absolute w-full z-50 px-8 pb-40 bg-gradient-to-b from-black flex justify-between">
+    <div className="fixed w-screen z-50 px-8 pb-40 bg-gradient-to-b from-black flex justify-between">
       <img className="w-44" src={LOGO} alt="logo" />
       {user && (
         <div className="flex items-center px-2">
