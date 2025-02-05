@@ -37,7 +37,6 @@ const Login = () => {
 
     if (message) return;
 
-
     // Sign In Sign Up Logic
     if (!isSignInForm) {
       // Sign Up Logic
@@ -95,9 +94,9 @@ const Login = () => {
         onSubmit={(e) => {
           e.preventDefault();
         }}
-        className="absolute p-12 bg-black my-36 mx-auto right-0 left-0 w-3/12 text-white rounded-lg bg-opacity-75"
+        className="absolute p-6 lg:p-12 bg-black my-36 mx-auto right-0 left-0 w-[80%] lg:w-3/12 text-white rounded-lg bg-opacity-75"
       >
-        <h1 className="font-bold text-3xl py-4">
+        <h1 className="font-bold text-lg lg:text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
         </h1>
         {!isSignInForm && (
@@ -105,7 +104,7 @@ const Login = () => {
             ref={username}
             type="text"
             placeholder="Full Name"
-            className="p-2 py-4 mx-2 my-4 w-full bg-gray-600 outline-none"
+            className="p-2 lg:py-4 m-2 lg:my-4 w-full bg-gray-600 outline-none"
           />
         )}
         <input
@@ -113,23 +112,26 @@ const Login = () => {
           userMessage
           type="text"
           placeholder="Email Address"
-          className="px-2 py-4 mx-2 my-4 w-full bg-gray-600 outline-none"
+          className="p-2 lg:py-4 m-2 lg:my-4 w-full bg-gray-600 outline-none"
         />
         <input
           ref={password}
           type="password"
           placeholder="Password"
-          className="p-2 py-4 mx-2 my-4 w-full bg-gray-600 outline-none"
+          className="p-2 lg:py-4 m-2 lg:my-4 w-full bg-gray-600 outline-none"
         />
 
         <p className="text-red-500 font-bold text-lg  p-2">{errorMessage}</p>
         <button
           onClick={handleButtonClick}
-          className="py-4 px-2 mx-2 my-4 bg-red-700 w-full rounded-lg"
+          className="p-2 lg:py-4 m-2 lg:my-4 bg-red-700 w-full rounded-lg"
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <p onClick={toggleSignIn} className="py-4 cursor-pointer">
+        <p
+          onClick={toggleSignIn}
+          className="py-4 text-sm lg:text-base text-center cursor-pointer"
+        >
           {isSignInForm
             ? "New to Netflix? Sign Up Now"
             : "Already registered? Sign In now"}
